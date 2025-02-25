@@ -13,66 +13,67 @@ box.style.width = `${boxWidth}px`;
 const containerPadding = 5;
 
 let isMovingRight = true;
+let movement = 0;
 
+let rgb1 = 255;
+let rgb2 = 255;
+let rgb3 = 255;
 
 button.addEventListener('click', function () {
-    let rgb1 = 255;
-    let rgb2 = 255;
-    let rgb3 = 255;
+
+    let rgb1 = 215;
+    let rgb2 = 155;
+    let rgb3 = 155;
 
     box.style.backgroundColor = `rgb(${rgb1}, ${rgb2}, ${rgb3})`;
-    let movement = 0;
+    
     const screenWidth = window.innerWidth - containerPadding;
-    console.log(screenWidth);
 
 
+    if (isMovingRight === true) {
 
-    const boxInterval = setInterval(function() {
+        const boxInterval = setInterval(function() {
+            movement += 5;
+            box.style.left = `${movement}px`;
 
+            rgb1 -= 1;
+            rgb2 -= 3;
+            rgb3 -= 1;
+        
+            box.style.backgroundColor = `rgb(${rgb1}, ${rgb2}, ${rgb3})`;
 
-        if (isMovingRight === true) {
+            if ((screenWidth - boxWidth) <= movement) {
+                clearInterval(boxInterval);
+                isMovingRight = false; 
+            } 
+            return movement;
 
+        }, 50);
 
+    } else {
 
+        const reverseInterval = setInterval(function() {
+            rgb1 += 1;
+            rgb2 += 3;
+            rgb3 += 1;
+            box.style.backgroundColor = `rgb(${rgb1}, ${rgb2}, ${rgb3})`;
+            movement -= 5;
+            box.style.left = `${movement}px`;
 
-            
-            isMovingRight === false;
-        } else {
-
-            isMovingRight === false;
-
-
-
-
-        }
-
-
-
-
-
-
-        movement += 5;
-        box.style.left = `${movement}px`;
-        console.log(movement);
-
-        rgb1 -= 1;
-        rgb2 -= 3;
-        rgb3 -= 1;
-
-        console.log(rgb1, rgb2, rgb3);
-
-        box.style.backgroundColor = `rgb(${rgb1}, ${rgb2}, ${rgb3})`;
+            if (movement <= 0) {
+                clearInterval(reverseInterval);
+                isMovingRight = true;
+            } 
 
 
-        if ((screenWidth - boxWidth) <= movement) {
-            clearInterval(boxInterval);
-        }
+        }, 50);
+    }
 
-    }, 50);
+}); 
 
 
 
 
 
 
-});
+
