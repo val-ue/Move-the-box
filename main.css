@@ -48,10 +48,14 @@
   }
 
   .box {
-    background-color: rgb(251, 251, 251);
+    background-color: white;
     height: 90px;
+    width: 90px;
+    left: 0px;
     border-radius: 5%;
     position: absolute;
+    transition: left 1s, background-color 1s;
+  
   }
 
   button {
@@ -60,4 +64,14 @@
     font-weight: 600;
     background-color: rgb(0, 0, 0);
     color: whitesmoke;
+  }
+
+  .left {
+    left: 0px;
+    background-color: rgb(215, 155, 155); 
+  }
+
+  .right {
+    left: calc(100vw - 100px);
+    background-color: rgb(128, 0, 128);
   }
